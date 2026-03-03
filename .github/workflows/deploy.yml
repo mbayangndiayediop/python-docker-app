@@ -16,27 +16,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Récupération du code
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Installation de Python
       - name: Set up Python 3.13
         uses: actions/setup-python@v4
         with:
           python-version: '3.13'
 
-      # Installer les dépendances
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install flask==2.3.2 werkzeug==2.3.7
 
-      # Lancer les tests unitaires
       - name: Run unit tests
         run: python -m unittest discover -s . -p "test_*.py"
 
-      # Upload des fichiers si besoin
       - name: Upload Flask app as artifact
         uses: actions/upload-artifact@v4
         with:
